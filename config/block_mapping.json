@@ -1,0 +1,68 @@
+{
+  "excel_columns": {
+    "room_number": "Номер пом.",
+    "room_name": "Наименование помещения",
+    "area": "F, м2",
+    "air_supply": "L пр., м3/час",
+    "air_extract": "L выт., м3/час",
+    "heat_loss": "Теплоп. по помеще-нию, Вт, с запасом 10%",
+    "supply_system": "П",
+    "extract_system": "В",
+    "cleanliness_class": "Класс чистоты",
+    "temperature": "t, °С",
+    "coordinate_x": "X координата",
+    "coordinate_y": "Y координата"
+  },
+  "block_attributes": {
+    "room_number": "ROOM_NUM",
+    "room_name": "ROOM_NAME", 
+    "area": "AREA",
+    "air_supply": "AIR_IN",
+    "air_extract": "AIR_OUT",
+    "heat_loss": "HEAT_LOSS",
+    "supply_system": "P_SYS",
+    "extract_system": "V_SYS",
+    "cleanliness_class": "CL_CLASS",
+    "temperature": "TEMP"
+  },
+  "target_blocks": [
+    "ROOM_DATA",
+    "ПОМЕЩЕНИЕ",
+    "ROOM_BLOCK",
+    "base_room_hvac"
+  ],
+  "default_template_block": "HVAC_ROOM_DATA",
+  "reverse_import_fields": [
+    "supply_system",
+    "extract_system"
+  ],
+  "placement_settings": {
+    "grid": {
+      "default_start_x": 0,
+      "default_start_y": 0,
+      "default_spacing_x": 1000,
+      "default_spacing_y": 1000,
+      "blocks_per_row": 20
+    }
+  },
+  "multiple_data_sources": {
+    "enabled": true,
+    "field_priorities": {
+      "temperature": "air_exchange",
+      "area": "air_exchange", 
+      "room_name": "air_exchange"
+    },
+    "sources_templates": {
+      "heat_loss": {
+        "description": "Расчет теплопотерь",
+        "typical_fields": ["room_number", "room_name", "heat_loss"],
+        "priority": 1
+      },
+      "air_exchange": {
+        "description": "Расчет воздухообменов", 
+        "typical_fields": ["room_number", "room_name", "area", "air_supply", "air_extract", "supply_system", "extract_system", "cleanliness_class", "temperature"],
+        "priority": 2
+      }
+    }
+  }
+}
