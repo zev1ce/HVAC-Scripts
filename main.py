@@ -3,6 +3,7 @@
 """
 import os
 import sys
+import pandas as pd
 from pathlib import Path
 
 # Добавляем папку src в путь для импорта модулей
@@ -437,7 +438,6 @@ def import_data_from_blocks(autocad_controller, room_data, existing_blocks, exce
 def save_merged_data_with_block_updates(reader, room_data, block_data, output_file):
     """Сохраняет объединенные данные с обновлениями из блоков в новый файл"""
     try:
-        import pandas as pd
         # Получаем поля для обратного импорта из конфигурации  
         reverse_fields = reader.config.get("reverse_import_fields", ["supply_system", "extract_system"])
         
@@ -525,9 +525,7 @@ def get_manual_coordinates(room_data):
 
 def create_sample_excel(file_path: str):
     """Создает пример Excel файла с данными ОВИК"""
-    try:
-        import pandas as pd
-        
+    try:        
         # Создаем папку если её нет
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         
